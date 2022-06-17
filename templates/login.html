@@ -1,0 +1,71 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/login-style.css' %}">
+</head>
+<body>
+    
+    <div class="container">
+        <div class="card">
+            <div class="inner-box" id="card">
+                <div class="card-front">
+                    <h2>Login</h2>
+                    <div class="messages">
+                        {% for message in messages %}
+                        <h5>{{message}}</h5>
+                        {% endfor %}
+                    </div>
+                    <form action="login" method="post">
+                        {% csrf_token %}
+                        <input type="text" name="username" class="input-box" placeholder="username" required>
+                        <input type="password" name="password" class="input-box" placeholder="password" required>
+                        <button type="submit" class="submit-btn">Submit</button>
+                        <!-- <input type="checkbox"><span>Remember Me</span> -->
+                    </form>
+                    <button type="button" class="btn" onclick="openRegister()">I'm new here!</button>
+                    <!-- <a href="#">Forgot Password</a> -->
+                </div>
+                <div class="card-back">
+                    <h2>Register</h2>
+                    <div class="messages">
+                        {% for message in messages %}
+                        <h5>{{message}}</h5>
+                        {% endfor %}
+                    </div>
+                    <form action="signup" method="POST">
+                        {% csrf_token %}
+                        <input type="text" name="username_s" class="input-box" id="user-name" onkeyup="validateName()" placeholder="Username(name.surname)" required>
+                        <span id="username-error"></span>
+                        <input type="email" name="email" class="input-box" id="user-email" onkeyup="validateEmail()" placeholder="email" required>
+                        <span id="email-error"></span>
+                        <input type="password" name="password_s" class="input-box" id="user-password" onkeyup="validatePassword()" placeholder="password" required>
+                        <span id="password-error"></span>
+                        <input type="password" name="password_2_s" class="input-box" id="confirm-password" onkeyup="confirmPassword()" placeholder="confirm password" required>
+                        <span id="confirm-error"></span>
+                        <button type="submit" onclick=" return validateSignup()" class="submit-btn">Submit</button>
+                        <span id="signup-error"></span>
+                    </form>
+                    <button type="button" class="btn" onclick="openLogin()">Already have an account?</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- copyright message -->
+
+<div class="footer">
+    <p><i class="fa-solid fa-copyright"></i> Copyright 2022 - Robeen Gyawali</p>
+</div>
+<script src="{% static 'js/login.js' %}"></script>
+<script src="{% static 'js/validation.js' %}"></script>
+
+<style>
+    .card-front, .card-back{
+        background-image: linear-gradient(rgba(10, 216, 6, 0.8), rgba(145, 228, 169, 0.8)), url("{% static 'assets/images/LionMask.jpg' %}");
+    }
+</style>
+</body>
+</html>

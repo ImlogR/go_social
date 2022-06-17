@@ -1,0 +1,262 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <script src="https://kit.fontawesome.com/4430c6a384.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    
+    <!-- navigation-bar -->
+
+    <nav>
+        <div class="nav-left">
+            <img src="{% static 'assets/images/LionMask.jpg' %}" class="logo">
+            <h2 class="goSocial-logo"><a href="/" class="home-link">goSocial</a></h2>
+            <!-- <ul>
+                <li><img src="{% static 'assets/images/notification.png' %}"></li>
+                <li><img src="{% static 'assets/images/inbox.png' %}"></li>
+                <li><img src="{% static 'assets/images/video.png' %}"></li>
+            </ul> -->
+        </div>
+        <div class="nav-right">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Search">
+            </div>
+            <div class="nav-user-icon online" onclick="settingsMenuToggle()">
+                <img src="{{current_user_profile.profilePic.url}}">
+            </div>
+
+        </div>
+
+        <!-- settings-menu -->
+
+        <div class="settings-menu">
+
+            <div id="dark-btn">
+                <span></span>
+            </div>
+
+            <div class="settings-menu-inner">
+                <div class="user-profile">
+                    <img class="setting-profile" src="{{current_user_profile.profilePic.url}}">
+                    <div>
+                        <p>@{{current_user_profile.user}}</p>
+                        <a href="/profile/{{user}}">Profile</a>
+                    </div>
+                </div>
+                <hr>
+                <div class="user-profile">
+                    <img src="{% static 'assets/images/feedback.png' %}">
+                    <div>
+                        <p>Feedback</p>
+                        <a href="#">Help us improve</a>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="setting-links">
+                    <i class="fa-solid fa-gear settings-icons settings-icons"></i>
+                    <a href="/settings">Profile Settings <i class="fa-solid fa-angle-right"></i></a>
+                </div>
+                <div class="setting-links">
+                    <i class="fa-solid fa-circle-info settings-icons settings-icons"></i>
+                    <a href="#">Help & Support <i class="fa-solid fa-angle-right"></i></a>
+                </div>
+                <div class="setting-links">
+                    <i class="fa-solid fa-moon settings-icons settings-icons"></i>
+                    <a href="#">Display & Accessiblity<i class="fa-solid fa-angle-right"></i></a>
+                </div>
+                <div class="setting-links">
+                    <i class="fa-solid fa-arrow-right-from-bracket settings-icons settings-icons"></i>
+                    <a href="/logout">Log Out<i class="fa-solid fa-angle-right"></i></a>
+                </div>
+
+
+            </div>
+        </div>
+
+    </nav>
+<!-- profile page -->
+
+<div class="profile-container">
+    <img src="{% static 'assets/images/house_of_icon.png' %}" class="cover-img">
+    <div class="profile-details">
+        <div class="profile-detail-left">
+            <div class="profile-detail-row">
+                <img class="profile-detail-image" src="{{user_profile.profilePic.url}}">
+                <div>
+                    <h3>@{{user_profile.user}}</h3>
+                    <p>
+                        {{user_following}} Following -
+                        {% if user_followers == 1 %}
+                        {{user_followers}} Follower
+                        {% else %}
+                        {{user_followers}} Followers
+                        {% endif %}
+                    </p>
+                    {% if user_post_number == 1 %}
+                    <p>{{user_post_number}} Post</p>
+                    {% else %}
+                    <p>{{user_post_number}} Posts</p>
+                    {% endif %}
+                    <!-- <img src="{% static 'assets/images/ehehehe.jpg' %}">
+                    <img src="{% static 'assets/images/ehhiss.jpg' %}">
+                    <img src="{% static 'assets/images/Lion Mask.jpg' %}">
+                    <img src="{% static 'assets/images/Lion Mask_2.jpg' %}"> -->
+                </div>
+            </div>
+        </div>
+        <div class="profile-detail-right">
+            {% if current_user.username != user_object.username %}
+            <form action="/follow" method="POST">
+                {% csrf_token %}
+                <input type="hidden" value="{{user.username}}" name="follower">
+                <input type="hidden" value="{{user_object.username}}" name="user">
+                <button type="submit"> {{btnTxt}} </button>
+                <!-- <button type="button"><i class="fa-solid fa-message"></i> Message</button> -->
+            </form>
+            {% endif %}
+            <br>
+            <!-- <a href="#"><img src="{% static 'assets/images/more.png' %}"></a> -->
+        </div>
+    </div>
+
+    <div class="profile-info">
+        <div class="info-col">
+
+            <!-- information section -->
+
+            <div class="profile-bio">
+                <h3>Bio</h3>
+                <p class="bio-text">{{user_profile.bio}} <img src="{% static 'assets/images/feeling.png' %}"> </p>
+                <hr>
+                <!-- <ul>
+                    <li><i class="fa-solid fa-briefcase"></i> Director at 24hr</li>
+                    <li><i class="fa-solid fa-building-columns"></i> Studied at lalala University</li>
+                    <li><i class="fa-solid fa-school"></i> Went to Gyawa Baletaksar Sec. School</li>
+                    <li><i class="fa-solid fa-house"></i> Lives in Bhaktapur</li>
+                    <li><i class="fa-solid fa-location-dot"></i> From Gulmi</li>
+                </ul> -->
+            </div>
+
+            <!-- user photos -->
+
+            <div class="profile-bio">
+                <div class="title-box">
+                    <h3>Photos</h3>
+                    <!-- <a href="#">All Photos</a> -->
+                </div>
+
+                <div class="photo-box">
+                    {% for post in user_posts %}
+                    <div><a href="{{post.image.url}}" target="_blank"><img src="{{post.image.url}}"></a></div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- user following photos/links -->
+
+            <!-- <div class="profile-bio">
+                <div class="title-box">
+                    <h3>Following</h3>
+                    <a href="#">All Following</a>
+                </div>
+                <p>120 (10 mutual)</p>
+                <div class="following-box">
+                    <div><img src="{% static 'assets/images/Lion Mask.jpg' %}"><p>Blue Lion</p></div>
+                    <div><img src="{% static 'assets/images/ehhiss.jpg' %}"><p>Will Smith</p></div>
+                    <div><img src="{% static 'assets/images/ehehehe.jpg' %}"><p>Mr Incredible</p></div>
+                    <div><img src="{% static 'assets/images/maafkarns.jpg' %}"><p>I'm Sorry</p></div>
+                    <div><img src="{% static 'assets/images/notification.jpg' %}"><p>Jerry Lawyer</p></div>
+                    <div><img src="{% static 'assets/images/Lion Mask_2.jpg' %}"><p>Red Lion</p></div>
+                </div>
+            </div> -->
+        </div>
+
+        <!-- user posts -->
+
+        <div class="post-col">
+            {% if user_object.username == current_user.username %}
+            <div class="write-post-container">
+                <div class="user-profile">
+                    <img class="post-profile" src="{{current_user_profile.profilePic.url}}">
+                    <div>
+                        <p>from <b>{{current_user.username}}</b></p>
+                        <small>To the followers <i class="fa-solid fa-caret-down"></i></small>
+                    </div>
+                </div>
+                <div class="post-input-container">
+                    <form action="/post_upload_via_profile" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <textarea name="caption" rows="3" placeholder="Caption your post!" required
+                        ></textarea>
+                        <div class="add-post-links">
+                            <!-- <a href="#"><img src="{% static 'assets/images/live-video.png' %}">Live Video</a> -->
+                            <a><img src="{% static 'assets/images/photo.png' %}"><input type="file" name="image_upload" class="custom-file-input" required></a>
+                            <!-- <a href="#"><img src="{% static 'assets/images/feeling.png' %}">Activity</a> -->
+                            <button type="submit"><i class="fa-solid fa-arrow-up-from-bracket"></i> Post</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- posts start from here!!-->
+
+            <!-- post number 1 -->
+            {% for post in user_posts reversed %}
+            <div class="post-container">
+                <div class="post-row">
+                    <div class="user-profile">
+                        <!-- <img src="{% static 'assets/images/received_360758301727209.jpeg' %}"> -->
+                        <div>
+                            <p><a href="#">@{{post.user}}</a></p>
+                            <!-- <span>June 24 2022, 10:12 A.M</span> -->
+                        </div>
+                    </div>
+                    <a href="#"><i class="fas fa-ellipsis-v"></i></a>
+                </div>
+
+                <p class="post-text">{{post.caption}}</p>
+                <img src="{{post.image.url}}" class="post-img">
+
+                <div class="post-row">
+                    <div class="activity-icons">
+                        {% if post.likies_no == 0 %}
+                        <div><a href="/like_post_via_profile?post_id={{post.id}}"><i class="fa-regular fa-heart" id="like-button"></i></a> No likes</div>
+                        {% elif post.likies_no == 1 %}
+                        <div><a href="/like_post_via_profile?post_id={{post.id}}"><i class="fa-regular fa-heart" id="like-button"></i></a>  1 like</div>
+                        {% else %}
+                        <div><a href="/like_post_via_profile?post_id={{post.id}}"><i class="fa-regular fa-heart" id="like-button"></i></a>  {{post.likies_no}} likes</div>
+                        {% endif %}
+                        <!-- <div><i class="fa-regular fa-comment"></i> 1k</div>
+                        <div><i class="fa-solid fa-share"></i> 100</div> -->
+                    </div>
+                    <div class="post-profile-icon">
+                        <img src="{{user_profile.profilePic.url}}">
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+
+
+
+<!-- copyright message -->
+
+    <div class="footer">
+        <p><i class="fa-solid fa-copyright"></i> Copyright 2022 - Robeen Gyawali</p>
+    </div>
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

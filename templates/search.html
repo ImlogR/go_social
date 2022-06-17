@@ -1,0 +1,122 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>goSocial</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://kit.fontawesome.com/4430c6a384.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-left">
+            <img src="{% static 'assets/images/LionMask.jpg' %}" class="logo">
+            <h2 class="goSocial-logo"><a href="/" class="home-link">goSocial</a></h2>
+            <!-- <ul>
+                <li><img src="{% static 'assets/images/notification.png' %}"></li>
+                <li><img src="{% static 'assets/images/inbox.png' %}"></li>
+                <li><img src="{% static 'assets/images/video.png' %}"></li>
+            </ul> -->
+        </div>
+        <div class="nav-right">
+        <form action="/search" method="POST">
+            {% csrf_token %}
+            <div class="search-box">
+                <input type="text" name="username" placeholder="Search User">
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+        </form>
+            <div class="nav-user-icon online" onclick="settingsMenuToggle()">
+                <img src="{{user_profile.profilePic.url}}">
+            </div>
+
+        </div>
+
+        <!-- settings-menu -->
+
+        <div class="settings-menu">
+
+            <div id="dark-btn">
+                <span></span>
+            </div>
+
+            <div class="settings-menu-inner">
+                <div class="user-profile">
+                    <img class="setting-profile" src="{{user_profile.profilePic.url}}">
+                    <div>
+                        <p>robeen.gyawali</p>
+                        <a href="profile/{{user}}">Profile</a>
+                    </div>
+                </div>
+                <hr>
+                <div class="user-profile">
+                    <img src="{% static 'assets/images/feedback.png' %}">
+                    <div>
+                        <p>Feedback</p>
+                        <a href="#">Help us improve</a>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="setting-links">
+                    <i class="fa-solid fa-gear settings-icons settings-icons"></i>
+                    <a href="settings">Profile Settings <i class="fa-solid fa-angle-right"></i></a>
+                </div>
+                <div class="setting-links">
+                    <i class="fa-solid fa-circle-info settings-icons settings-icons"></i>
+                    <a href="#">Help & Support <i class="fa-solid fa-angle-right"></i></a>
+                </div>
+                <div class="setting-links">
+                    <i class="fa-solid fa-moon settings-icons settings-icons"></i>
+                    <a href="#">Display & Accessiblity<i class="fa-solid fa-angle-right"></i></a>
+                </div>
+                <div class="setting-links">
+                    <i class="fa-solid fa-arrow-right-from-bracket settings-icons settings-icons"></i>
+                    <a href="logout">Log Out<i class="fa-solid fa-angle-right"></i></a>
+                </div>
+
+
+            </div>
+        </div>
+
+    </nav>
+
+<p 
+    style=
+    "
+    margin-top: 10px;
+    text-align: center;
+    ">
+    Results for your <i><b>Search</b></i>:
+</p>
+
+    <div class="profile-container">
+        {% for users in username_profile_list %}
+        <div class="profile-details">
+            <div class="profile-detail-left">
+                <div class="profile-detail-row">
+                    <img class="profile-detail-image" src="{{users.profilePic.url}}">
+                    <div>
+                        <h3>@{{users.user}}</h3><br>
+                        <p>From: {{users.location}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-detail-right">
+                    <a href="/profile/{{users.user}}" style="text-decoration: none;"><button type="submit"> View Profile </button></a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+<!-- copyright message -->
+
+<div class="footer">
+    <p><i class="fa-solid fa-copyright"></i> Copyright 2022 - Robeen Gyawali</p>
+</div>
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+
+::placeholder{
+    color: var(--placeholder);
+    opacity: 0.3;
+    font-style: italic;
+}
+:root{
+    --placeholder : #000;
+    --green-color : rgb(171, 243, 169);
+    --black-color : #000;
+    --footer : #187652;
+}
+.dark-theme{
+    --green-color: rgb(14, 14, 14);
+    --black-color : #fff;
+    --footer: #000;
+    --placeholder: rgb(0, 255, 26);
+}
+.container{
+    width: 100%;
+    height: 85vh;
+    font-family: sans-serif;
+    background: var(--green-color);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.card{
+    width: 350px;
+    height: 430px;
+    box-shadow: 0 0 40px 20px rgba(0, 0, 0, 0.26);
+    perspective: 1000px;
+}
+.bio p{
+    color: var(--black-color);
+    font-size: 20px;
+}
+.profile-picture, .bio, .location, .buttons{
+    padding: 15px;
+}
+.profile-picture img{
+    height: 100px;
+    width: 100px;
+    border-radius: 75%;
+    border: 3px solid var(--black-color);
+}
+.profile-picture p{
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: var(--black-color);
+}
+.bio textarea{
+    margin-top: 5px;
+    resize: none;
+    border: 0;
+    outline: 0;
+    border-bottom: 1px solid rgb(4, 0, 255);
+    background: none;
+    color: #187652;
+}
+.location input{
+    border: none;
+    outline: none;
+    background: none;
+    border-bottom: 1px solid rgb(4, 0, 255);
+    color: #187652;
+}
+.location p{
+    margin-bottom: 10px;
+    color: var(--black-color);
+    font-size: 20px;
+}
+.buttons{
+    margin-left: 180px;
+}
+.cancel{
+    color: rgb(243, 89, 89);
+    margin-right: 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+.cancel a{
+    color: red;
+    text-decoration: none;
+}
+.save{
+    color: rgb(60, 22, 212);
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+.footer{
+    background: var(--footer);
+    color: #fff;
+    text-align: center;
+}
+.profile-picture input{
+    color: green;
+    border: 0;
+}
+.nav-left p{
+    color: var(--black-color);
+}
