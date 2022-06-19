@@ -179,7 +179,7 @@
                         <!-- <img src="{% static 'assets/images/received_360758301727209.jpeg' %}"> -->
                         <div>
                             <p><a href="/profile/{{post.user}}">@{{post.user}}</a></p>
-                            <!-- <span>June 24 2022, 10:12 A.M</span> -->
+                            <span>{{post.created_at}}</span>
                         </div>
                     </div>
                     <a href="{{post.image.url}}" download><i style="cursor: pointer;" class="fa-solid fa-cloud-arrow-down"></i></a>
@@ -191,11 +191,11 @@
                 <div class="post-row">
                     <div class="activity-icons">
                         {% if post.likies_no == 0 %}
-                        <div><a href="like-post?post_id={{post.id}}" onclick="like(this)"><i class="fa-solid fa-heart" id="like-button" ></i></a> No likes</div>
+                        <div><a href="like-post?post_id={{post.id}}"><i class="fa-solid fa-heart" id="like-button" ></i></a> No likes</div>
                         {% elif post.likies_no == 1 %}
-                        <div><a href="like-post?post_id={{post.id}}"><i class="fa-solid fa-heart" id="like-button" ></i></a>  1 like</div>
+                        <div><a href="like-post?post_id={{post.id}}"><i class="fa-solid fa-heart" id="like-button"></i></a>  1 like</div>
                         {% else %}
-                        <div><a href="like-post?post_id={{post.id}}"><i class="fa-solid fa-heart" id="like-button" ></i></a>  {{post.likies_no}} likes</div>
+                        <div><a href="like-post?post_id={{post.id}}"><i class="fa-solid fa-heart" id="like-button"></i></a>  {{post.likies_no}} likes</div>
                         {% endif %}
                         <!-- <div><i class="fa-regular fa-comment"></i> 1k</div>
                         <div><i class="fa-solid fa-share"></i> 100</div> -->

@@ -22,7 +22,7 @@ class Post(models.Model):
     user= models.CharField(max_length= 100)
     image= models.ImageField(upload_to = 'post_images', default= 'nophoto.png')
     caption= models.TextField()
-    created_at= models.DateTimeField(default= datetime.now())
+    created_at= models.DateTimeField(default= datetime.now(), blank= True)
     likies_no= models.IntegerField(default=0)
 
     def __str__(self):
