@@ -200,6 +200,13 @@
                         {% endif %}
                         <!-- <div><i class="fa-regular fa-comment"></i> 1k</div>
                         <div><i class="fa-solid fa-share"></i> 100</div> -->
+                        <form action="comment" method="POST">
+                            {% csrf_token %}
+                            <div class="comment">
+                                <textarea name="comment" rows="1"></textarea>
+                                <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
+                            </div>
+                        </form>
                     </div>
                     <div class="post-profile-icon">
                         <img src="{{user_profile.profilePic.url}}">
