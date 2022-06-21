@@ -1,4 +1,3 @@
-from email.policy import default
 from django.db import models
 from django.contrib.auth import get_user_model
 import uuid
@@ -20,7 +19,7 @@ class Profile(models.Model):
 class Post(models.Model):
     id= models.UUIDField(primary_key= True, default= uuid.uuid4)
     user= models.CharField(max_length= 100)
-    image= models.ImageField(upload_to = 'post_images', default= 'nophoto.png')
+    image= models.ImageField(upload_to = 'post_images')
     caption= models.TextField()
     created_at= models.DateTimeField(default= datetime.now(), blank= True)
     likies_no= models.IntegerField(default=0)
