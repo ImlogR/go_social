@@ -1,3 +1,4 @@
+import base64
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
@@ -216,7 +217,7 @@ def profile(request, pk):
 def upload(request):
     if request.method== 'POST':
         user= request.user.username
-        image= request.FILES.get('image_upload')
+        image= request.FILES.get('image')
         caption= request.POST['caption']
 
         new_post= Post.objects.create(user= user, image= image, caption= caption)

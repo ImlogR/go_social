@@ -9,6 +9,7 @@
     <title>goSocial</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="https://kit.fontawesome.com/4430c6a384.js" crossorigin="anonymous"></script>
+    <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
 </head>
 <body>
     
@@ -156,12 +157,11 @@
                     </div>
                 </div>
                 <div class="post-input-container">
-                    <form action="upload" method="POST" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <textarea name="caption" rows="3" placeholder="Caption your post!" required></textarea>
+                    <form id="write-post">
+                        <textarea id="caption" name="caption" rows="3" placeholder="Caption your post!" required></textarea>
                         <div class="add-post-links">
                             <!-- <a href="#"><img src="{% static 'assets/images/live-video.png' %}">Live Video</a> -->
-                            <a><img src="{% static 'assets/images/photo.png' %}"><input type="file" name="image_upload" class="custom-file-input" required></a>
+                            <a><img src="{% static 'assets/images/photo.png' %}"><input type="file" name="image_upload" class="custom-file-input" id="image" required></a>
                             <!-- <a href="#"><img src="{% static 'assets/images/feeling.png' %}">Activity</a> -->
                             <button type="submit"><i class="fa-solid fa-arrow-up-from-bracket"></i> Post</button>
                         </div>
@@ -287,6 +287,7 @@
         <p><i class="fa-solid fa-copyright"></i> Copyright 2022 - Robeen Gyawali</p>
     </div>
 <script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/ajax.js' %}"></script>
 <style>
     .story1{
         background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.5) ), url("{% static 'assets/images/received_360758301727209.jpeg' %}");
