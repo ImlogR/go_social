@@ -157,11 +157,12 @@
                     </div>
                 </div>
                 <div class="post-input-container">
-                    <form id="write-post">
+                    <form action="upload" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
                         <textarea id="caption" name="caption" rows="3" placeholder="Caption your post!" required></textarea>
                         <div class="add-post-links">
                             <!-- <a href="#"><img src="{% static 'assets/images/live-video.png' %}">Live Video</a> -->
-                            <a><img src="{% static 'assets/images/photo.png' %}"><input type="file" name="image_upload" class="custom-file-input" id="image" required></a>
+                            <a><img src="{% static 'assets/images/photo.png' %}"><input type="file" name="image_upload" class="custom-file-input" required></a>
                             <!-- <a href="#"><img src="{% static 'assets/images/feeling.png' %}">Activity</a> -->
                             <button type="submit"><i class="fa-solid fa-arrow-up-from-bracket"></i> Post</button>
                         </div>
