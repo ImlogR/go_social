@@ -200,13 +200,13 @@
                         {% endif %}
                         <!-- <div><i class="fa-regular fa-comment"></i> 1k</div>
                         <div><i class="fa-solid fa-share"></i> 100</div> -->
-                        <form action="comment" method="POST">
+                        <!-- <form action="comment" method="POST">
                             {% csrf_token %}
                             <div class="comment">
-                                <textarea name="comment" rows="1"></textarea>
+                                <textarea name="comment" rows="1" required></textarea>
                                 <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
                             </div>
-                        </form>
+                        </form> -->
                     </div>
                     <div class="post-profile-icon">
                         <img src="{{user_profile.profilePic.url}}">
@@ -296,6 +296,39 @@
     </div>
 <script src="{% static 'js/script.js' %}"></script>
 <script src="{% static 'js/ajax.js' %}"></script>
+<script>
+var settingsmenu = document.querySelector(".settings-menu");
+var darkBtn= document.getElementById("dark-btn");
+
+function settingsMenuToggle(){
+    settingsmenu.classList.toggle("settings-menu-height");
+}
+
+darkBtn.onclick = function(){
+    darkBtn.classList.toggle("dark-btn-on");
+    document.body.classList.toggle("dark-theme");
+
+    if (localStorage.getItem("theme") == "light"){
+        localStorage.setItem("theme", "dark");
+    }
+    else {
+        localStorage.setItem("theme", "light");
+    }
+
+}
+
+if (localStorage.getItem("theme") == "light"){
+    darkBtn.classList.remove("dark-btn-on");
+    document.body.classList.remove("dark-theme");
+}
+else if (localStorage.getItem("theme") == "dark"){
+    darkBtn.classList.add("dark-btn-on");
+    document.body.classList.add("dark-theme");
+}
+else {
+    localStorage.setItem("theme", "light");
+}
+</script>
 <style>
     .story1{
         background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.5) ), url("{% static 'assets/images/received_360758301727209.jpeg' %}");
