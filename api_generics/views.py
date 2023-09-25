@@ -1,15 +1,11 @@
-from .serializer import UserSerializer
+from rest_framework import generics, mixins
 from django.contrib.auth.models import User
-from rest_framework import generics
-from rest_framework.response import Response
-from rest_framework.permissions import IsAdminUser
+from .serializer import UserSerializer
 
 class UserList(generics.ListCreateAPIView):
-    queryset= User.objects.all()
-    serializer_class= UserSerializer
-    # permission_classes= [IsAdminUser]
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
-    def list(self, request):
-        queryset= self.get_queryset()
-        serializer= UserSerializer(queryset, many= True, context={'request': request})
-        return Response(serializer.data)
+class UserDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

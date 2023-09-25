@@ -8,7 +8,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('myapp.urls')),
     # path('api/', include('api_viewset.urls')),
-    path('generics/', include('api_generics.urls'))
+    path('api/', include('api_generics.urls'))
+    # path('api/', include('api_view.urls'))
 ]
 
 urlpatterns = urlpatterns+static(settings.MEDIA_URL,
